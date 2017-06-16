@@ -6,7 +6,7 @@
 	<groupId>com.abeehive.abeehive</groupId>
 	<artifactId>parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
+
 	<packaging>pom</packaging>
 
 	<name>parent</name>
@@ -27,11 +27,49 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
+
 	<modules>
-	
 		<module>frontend</module>
 		<module>backend</module>
-
 	</modules>
 
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+				<execution>
+						<id>copy-backend-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/backend/target/</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-frontend-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/frontend/target/classes/</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

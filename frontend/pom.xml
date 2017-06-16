@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<packaging>pom</packaging>
+
 	<artifactId>frontend</artifactId>
 
 	<name>frontend</name>
@@ -69,12 +69,27 @@
 						</arguments> </configuration> <goals> <goal>exec</goal> </goals> </execution -->
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes/static/</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${basedir}/src/main/frontend/dist</directory>
+									</resource>
+								</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
-		<resources>
-            <resource>
-                <directory>target/frontend</directory>
-                <targetPath>static</targetPath>
-            </resource>
-        </resources>
 	</build>
+	<packaging>pom</packaging>
 </project>
